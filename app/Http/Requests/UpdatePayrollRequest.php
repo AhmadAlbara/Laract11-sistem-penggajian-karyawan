@@ -11,7 +11,7 @@ class UpdatePayrollRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdatePayrollRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'employee_id' => 'sometimes|exists:employees,id',
+            'month' => 'sometimes|string|max:255', 
+            'year' => 'sometimes|integer', 
+            'amount' => 'sometimes|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', //
         ];
     }
 }

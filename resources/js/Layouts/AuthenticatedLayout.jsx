@@ -45,12 +45,20 @@ export default function AuthenticatedLayout({ children }) {
                         Karyawan
                     </Link>
                     <Link
-                        href={route("attendance.index")}
+                        href={route("attendances.index")}
                         className={`block px-4 py-2 rounded ${isActiveLink(
-                            "attendance.*"
+                            "attendances.*"
                         )}`}
                     >
                         Absensi
+                    </Link>
+                    <Link
+                        href={route("payrolls.index")} // Tambahkan link untuk Payroll
+                        className={`block px-4 py-2 rounded ${isActiveLink(
+                            "payrolls.*"
+                        )}`}
+                    >
+                        Daftar gaji
                     </Link>
                     {/* Add more links as needed */}
                 </ul>
@@ -118,7 +126,7 @@ export default function AuthenticatedLayout({ children }) {
 
             <main className="p-4 sm:ml-64 mt-14 min-h-screen bg-gray-200">
                 {children}
-                <footer className="absolute bottom-0">
+                <footer>
                     <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
                         <p className="text-center text-gray-500">
                             © 2024 CV Verus Consultant Engineering. All rights

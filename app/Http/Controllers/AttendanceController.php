@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Http\Requests\StoreAttendanceRequest;
 use App\Http\Requests\UpdateAttendanceRequest;
+use App\Models\Employee;
 use Inertia\Inertia;
 
 class AttendanceController extends Controller
@@ -25,7 +26,10 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Attendances/Create'); // Render the form for creating a new attendance record
+        $employees = Employee::all(); // Ambil semua karyawan
+        return Inertia::render('Attendances/Create', [
+            'employees' => $employees,
+        ]);
     }
 
     /**
@@ -43,7 +47,7 @@ class AttendanceController extends Controller
     public function show(Attendance $attendance)
     {
         return Inertia::render('Attendances/Show', [
-            'attendance' => $attendance->load('employee'), // Show attendance details with employee data
+            'attendance' => $attendance->load('employee'),
         ]);
     }
 
@@ -52,8 +56,10 @@ class AttendanceController extends Controller
      */
     public function edit(Attendance $attendance)
     {
+        $employees = Employee::all(); 
         return Inertia::render('Attendances/Edit', [
-            'attendance' => $attendance, // Render the form for editing the attendance record
+            'attendance' => $attendance,
+            'employees' => $employees,
         ]);
     }
 

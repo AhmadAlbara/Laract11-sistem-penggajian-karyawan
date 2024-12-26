@@ -10,16 +10,17 @@ class Payroll extends Model
 {
     use HasFactory;
 
-    protected $keyType = 'string';
-    public $incrementing = false; 
-    protected $fillable = ['employee_id', 'month', 'year', 'amount']; 
+    protected $keyType = 'string'; // Mengatur key type menjadi string
+    public $incrementing = false; // Menonaktifkan auto-increment
+
+    protected $fillable = ['employee_id', 'month', 'year', 'amount', 'image']; // Kolom yang dapat diisi
 
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function ($model) {
-            $model->id = (string) Str::uuid(); 
+            $model->id = (string) Str::uuid(); // Menghasilkan UUID saat membuat model
         });
     }
 

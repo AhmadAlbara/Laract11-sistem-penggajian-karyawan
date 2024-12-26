@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payrolls', function (Blueprint $table) {
-            $table->uuid();
-            $table->foreignUuid('employee_id')->constrained()->onUpdate("cascade")->onDelete("cascade"); 
+            $table->uuid('id')->primary(); // Definisikan kolom id sebagai UUID dan primary key
+            $table->foreignUuid('employee_id')->constrained()->onUpdate("cascade")->onDelete("cascade");
             $table->string('month');
             $table->integer('year');
             $table->decimal('amount', 10, 2);
+            $table->string('image')->nullable(); // Kolom untuk menyimpan nama file gambar
             $table->timestamps();
         });
      

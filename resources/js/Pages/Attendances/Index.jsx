@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import Button from "@/Components/Elements/Button";
 
 const AttendanceIndex = ({ attendances }) => {
-    const [openDropdown, setOpenDropdown] = useState(null); 
-
+    const [openDropdown, setOpenDropdown] = useState(null);
+    const dropdownRef = useRef(null);
 
     const deleteAttendance = (id) => {
         if (
@@ -16,9 +16,8 @@ const AttendanceIndex = ({ attendances }) => {
     };
 
     const toggleDropdown = (id) => {
-        setOpenDropdown(openDropdown === id ? null : id); 
+        setOpenDropdown(openDropdown === id ? null : id);
     };
-
 
     return (
         <AuthenticatedLayout
@@ -76,7 +75,9 @@ const AttendanceIndex = ({ attendances }) => {
                                             {attendance.date}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {attendance.status}
+                                            {attendance.status === "present"
+                                                ? "Hadir"
+                                                : "Tidak Hadir"}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <div
